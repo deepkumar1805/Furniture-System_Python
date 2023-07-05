@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <!-- Set up a container element for the button -->
+    <div id="paypal-button-container"></div>
+    <!-- Replace "test" with your own sandbox Business account app client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQ7ScICe0lWyPY-3AIksw4HaR30McGC-NncguuGnuZoIVVY9Z6juD5IS0pV7kpP1yAKLDyity8rlC1G_&currency=USD"></script>
+    <script>
+     paypal.Buttons(
+  //     {
+  //     createOrder: function(data, actions) {
+  //       return actions.order.cerate({
+  //         purchase_units:[{
+  //           amount:{
+  //             value:'10.1'
+  //           }
+  //         }]
+  //       });
+  //     },
+
+  //     onApprove: function(data, actions){
+  //       return actions.oredr.capture().then(function(details){
+  //       alert('Transaction completed by' + details.payer.name.given_name + '!');
+  //     });
+  //   }
+  // }
+  ).render('#paypal-button-container');
+    </script>
+  </body>
+</html>
+
+  <!-- <div id="payme1" style="width: 100%; height:100%; position: fixed; display: flex; opacity: 100%; z-index: 1;
+              background-color: rgb(0,0,0);  background-color: rgba(0,0,0,0.9); display: none;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 50px; ">
+      <img src="{% static 'img/googlepay.jpeg' %}" alt="" width="40%">
+      <span onclick="closedpay()"
+        style="position: absolute;top: 15px;right: 35px;color: #f1f1f1;font-size: 50px;cursor: pointer; font-weight: bold;">&times;</span>
+    </div>
+  </div>
+  <div id="payme2" style="width: 100%; height:100%; position: fixed; display: flex; opacity: 100%; z-index: 1;
+              background-color: rgb(0,0,0);  background-color: rgba(0,0,0,0.9); display: none;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 50px; ">
+      <img src="{% static 'img/paytm.jpeg' %}" alt="" width="40%">
+      <span onclick="closedpay1()"
+        style="position: absolute;top: 15px;right: 35px;color: #f1f1f1;font-size: 50px;cursor: pointer; font-weight: bold;">&times;</span>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <div class="checkout">
+      <div class="checkout-header">
+        <h3 class="checkout-title">
+          Checkout
+        </h3><br>
+      </div>
+      <div style="display: flex; justify-content: space-around; ">
+        <p>
+        <div class="form-floating" style="width: 250px;">
+          <input type="text" class="form-control" id="pfname" placeholder="Name" autofocus>
+          <label for="floatingInput">Card Holder Name</label><br>
+        </div>&nbsp;&nbsp;
+        <div class="form-floating" style="width: 70px;">
+          <input type="text" class="form-control" id="pmonth" placeholder="Name">
+          <label for="floatingInput">MM</label><br>
+        </div>&nbsp;&nbsp;
+        <div class="form-floating" style="width: 70px;">
+          <input type="text" class="form-control" id="pyear" placeholder="Name">
+          <label for="floatingInput">YY</label><br>
+        </div>
+        </p>
+      </div>
+      <div style="display: flex; justify-content: space-around;">
+        <p>
+        <div class="form-floating" style="width: 330px;">
+          <input type="text" class="form-control" id="pcardnum" placeholder="4111 1111 1111 1111">
+          <label for="floatingInput">Card Number</label><br>
+        </div>&nbsp;&nbsp;
+        <div class="form-floating" style="width: 70px;">
+          <input type="text" class="form-control" id="pcvc" placeholder="4111 1111 1111 1111">
+          <label for="floatingInput">CVV</label><br>
+        </div>
+        </p>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <p>
+          <button onclick="pay()" type="button" class="btn btn-success">Pay</button>
+        </p>&nbsp;&nbsp;&nbsp;
+        <div style="width: 50%; display: flex;">
+          <i class="fa-brands fa-google-pay" onclick="payme()" style="font-size: 30px;"></i>&nbsp;&nbsp;
+          <i class="fa-brands fa-cc-amazon-pay" onclick="paymee()" style="font-size: 30px;"></i>
+        </div>
+      </div>
+    </div>
+  </div><br><br> -->
+
+
+  
+  {% endblock %}

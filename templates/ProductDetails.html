@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb Start -->
+ <div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'shop' %}">Shop</a>
+                <span class="breadcrumb-item active">Shop Detail</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+   {% for i in data %}
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="{{i.image.url}}" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 h-auto mb-30">
+            <div class="h-100 bg-light p-30">
+                <h4 class="mb-3">{{i.name}}</h4>
+                <h3 class="mb-4">₹{{i.price}}</h3>
+                <p class="mb-4">{{i.description}}</p>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 100px;">
+                        <div class="input-group-btn">
+                            <a href="{% url 'item_decrement' i.id %}" class="btn btn-sm btn-primary btn-minus" >
+                                <i class="fa fa-minus"></i>
+                            </a>
+                        </div>
+                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                        <div class="input-group-btn">
+                            <a href="{% url 'item_increment' i.id %}" class="btn btn-sm btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger px-3"><a href="{% url 'cart_add' i.id %}" style="text-decoration:none;" class="fa fa-shopping-cart mr-1"> Add To Cart </a></button>
+                </div>
+                <div class="d-flex pt-2">
+                    <strong class="text-dark mr-2">Share on:</strong>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- Shop Detail End -->
+
+ <!-- Shop Detail Start -->
+ <div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="bg-light p-30">
+                <div class="nav nav-tabs mb-4">
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews</a>
+                </div>
+                <div class="tab-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% for i in page_obj %}
+                                <h4 class="mb-4"></h4>
+                                <div class="media mb-4">
+                                    <img src="{% static 'img/download.jpeg' %}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px; border-radius: 50%">
+                                    <div class="media-body">
+                                        <h6>{{i.name}}</h6>
+                                        <p class="text-wrap"  style="max-width:600px;">{{i.reviews}}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h4 class="mb-4">Leave a review</h4>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="control-group">
+                                        {% comment %} {{data1.product_review}} {% endcomment %}
+                                        <div style="display:none;">{{data1.product_review}}</div>
+                                        {{data1.reviews}}
+                                        <!-- <textarea class="form-control" rows="8" id="message" placeholder="Message"
+                                            required="required"
+                                            data-validation-required-message="Please enter your message"></textarea> -->
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        {{data1.name}}
+                                        <!--  <input type="text" class="form-control" id="name" placeholder="Your Name"
+                                            required="required" data-validation-required-message="Please enter your name" /> -->
+                                        <p class="help-block text-danger"></p> 
+                                    </div>
+                                    <div class="control-group">
+                                        {{data1.email}}
+                                        <!-- <input type="email" class="form-control" id="email" placeholder="Your Email"
+                                            required="required" data-vali` 5dation-required-message="Please enter your email" /> -->
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                    </div>
+                                </form>
+                                {% if msg %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{msg}}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <center>
+                                {%if page_obj.has_previous %}
+                                <a href="?page={{page_obj.previous_page_number}}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;"><</a>&nbsp;&nbsp; 
+                                {% endif %}
+                                <span>{{page_obj.number}}</span>
+                                    
+                                    {%if page_obj.has_next %} 
+                                    &nbsp;&nbsp;<a href="?page={{page_obj.next_page_number}}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;">></a>
+                                    {% endif %}
+                            </center>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Detail End -->
+
+
+{% endblock %}

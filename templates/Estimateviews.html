@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+   
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'shop' %}">Estimate</a>
+                    <span class="breadcrumb-item active">Estimate  List</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+           
+
+
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-8">
+                <div class="row pb-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="text-center py-4">
+                                <h4 class="h6 text-decoration-none text-truncate" href="">Your Price is: ₹{{context}}</h4>
+                                <br>
+                                <a href="{% url 'shop' %}">
+                                    <button type="button" class="btn btn-warning">Buy Product</button></a>
+                                {% comment %} <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h5><a href="">View All Desinger</a></h5>
+                                </div> {% endcomment %}
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Shop Product End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+{% endblock %}

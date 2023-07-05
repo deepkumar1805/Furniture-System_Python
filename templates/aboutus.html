@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+<!-- about section start -->
+<div class="about_section layout_padding" style="margin-top: 80px;">
+    <div class="container d-flex">
+        <div style="text-align: center; margin-top: 80px;">
+            <h1 style="font-size: 3rem;" class="about_taital">About Our Furniture</h1>
+            <p class="about_text">At our company, we believe that furniture is more than just a functional item; it is a reflection of your personality and style. That's why we offer a wide variety of furniture pieces that are designed to suit any taste and budget. Whether you're looking for a classic, traditional piece or a modern, contemporary design.</p>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div>
+          <img src="{% static 'img/about.jpg' %}" style="width: 600px;">
+       </div>
+    </div>
+ </div>
+ <!-- about section end -->
+
+
+ <!-- Vendor Start -->
+ <div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-1.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-2.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-3.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-4.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-5.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-6.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-7.jpg' %}" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-8.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Vendor End -->
+
+
+{% endblock %}

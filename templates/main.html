@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Carousel Start -->
+    <div class="container-fluid mb-3">
+        <div class="row px-xl-5">
+            <div class="col-lg-12">
+                <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#header-carousel" data-slide-to="1"></li>
+                        <li data-target="#header-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item position-relative active" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="{% static 'img/c1.jpg' %}" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Leather Sofa</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">NKF CARVE Wooden 3 Seater Sofa Set for Living Room | Three Seater Sofa with Side Magzine</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="{% url 'shop' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="{% static 'img/c2.jpg' %}" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Dining Table</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Custom Decor Solid Wood CNC 9 Seater Dining Set in Provincial Teak Finish Dining Set and Chairs</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="{% url 'shop' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="{% static 'img/c3.jpg' %}" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Chair</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Timberly Upholstered Printed Single Seater Sofa Chair with Matching Cushion, Rest Chair for Living Room</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="{% url 'shop' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Categories Start -->
+    <div class="container-fluid pt-5">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span></h2>
+        <div class="row px-xl-5 pb-3">
+            {% for i in data %}
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="{% url 'productcatev' i.id %}">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="{{i.Category_image.url}}" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>{{i.category_name}}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Categories End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid pt-5 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
+        <div class="row px-xl-5">
+            {% for post in page_obj.object_list %}
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{{post.image.url}}" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href="{% url 'shop' %}"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-wrap" style="width: 3rem;" href="">{{post.name}}</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>₹{{post.price}}</h5><h6 class="text-muted ml-2"></h6>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+           {% endfor %}
+        </div>
+    </div>
+    <!-- Products End -->
+
+    <center>
+        {%if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;"><</a>&nbsp;&nbsp; 
+        {% endif %}
+        <span>{{page_obj.number}}</span>
+            
+            {%if page_obj.has_next %} 
+            &nbsp;&nbsp;<a href="?page={{page_obj.next_page_number}}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;">></a>
+            {% endif %}
+    </center>
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-1.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-2.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-3.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-4.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-5.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-6.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-7.jpg' %}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="{% static 'img/vendor-8.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+     <!-- Offer Start -->
+    <div class="container-fluid pt-5 pb-3">
+        <div class="row px-xl-5">
+            <div class="col-md-4">
+                <div class="product-offer mb-30" style="height: 300px;">
+                    <img class="img-fluid" src="{% static 'img/sofoo-3.jpg' %}" alt="">
+                    <div class="offer-text">
+                        <h3 class="text-white mb-3">Sofa</h3>
+                        <a href="{% url 'shop' %}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-offer mb-30" style="height: 300px;">
+                    <img class="img-fluid" src="{% static 'img/d1.jpg' %}" alt="">
+                    <div class="offer-text">
+                        <h3 class="text-white mb-3">Dining Table</h3>
+                        <a href="{% url 'shop' %}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-offer mb-30" style="height: 300px;">
+                    <img class="img-fluid" src="{% static 'img/cc1.jpg' %}" alt="">
+                    <div class="offer-text">
+                        <h3 class="text-white mb-3">Chair</h3>
+                        <a href="{% url 'shop' %}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Offer End -->
+
+
+{% endblock %}

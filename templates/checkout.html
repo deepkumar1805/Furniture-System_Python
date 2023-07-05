@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">CheckOut</span></h2>
+        <div class="row px-xl-5"> 
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form name="sentMessage"  method="POST">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            
+                            <input type="text" class="form-control" name="fname" id="f_name" value="{{request.user.first_name}}" placeholder="First Name"
+                                required="required" data-validation-required-message="Please enter your first name" /> 
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            
+                             <input type="text" class="form-control" name="lname" id="l_name" value="{{request.user.last_name}}" placeholder="Last Name"
+                                required="required" data-validation-required-message="Please enter your last Name" /> 
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            
+                            <input type="text" class="form-control" name="email" id="add" value="{{request.user.email}}" placeholder="Email"
+                               required="required" data-validation-required-message="Please enter your address" /> 
+                           <p class="help-block text-danger"></p>
+                       </div>
+                        
+                        <div class="control-group">
+                             <input type="text" class="form-control" name="address" id="add" placeholder="Address"
+                                required="required" data-validation-required-message="Please enter your address" /> 
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        {% for key,value in request.session.cart.items %}
+                     <div class="control-group">
+                            
+                            <input type="hidden" class="form-control" name="product_qty" value="{{value.quantity}}" id="product_qty" placeholder="Product_Qty"
+                                required="required" data-validation-required-message="Please enter your product_qty" /> 
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            
+                            <input type="hidden" class="form-control" name="products_id" id="Products_Id" value="{{value.name}}" placeholder="Products_Id"
+                                required="required" data-validation-required-message="Please enter your products_id" /> 
+                            <p class="help-block text-danger"></p>
+                        </div> 
+                        <div class="control-group">
+                            
+                            <input type="hidden" class="form-control" id="Products_Id" name="username" value="{{request.user}}" placeholder="Products_Id"
+                                required="required" data-validation-required-message="Please enter your products_id" /> 
+                            <p class="help-block text-danger"></p>
+                        </div> 
+                        {% endfor %}
+                        <div class="control-group">
+                            <select name="type" class="form-control">
+                              <option  name="paymentid" value="COD">COD</option>
+                              <option  name="paymentid" value="Online">Online</option>
+                            </select>
+                        </div>    
+                        {% comment %} <div>
+                            <label><input type="radio"  name="paymentid" value="COD">&nbsp;Pay Cash On Delivery</label>
+                        </div>  
+                        <div>
+                            <label><input type="radio" name="paymentid" value="Online">&nbsp;Pay Online</label>
+                        </div>  {% endcomment %}
+                        <br>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Purchase</button>
+                        </div>
+                      
+                    </form>
+                </div>
+                {% if msg %}
+                <div class="alert alert-danger" role="alert">
+                    {{msg}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+    {% endblock %}

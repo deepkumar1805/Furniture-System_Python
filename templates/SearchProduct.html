@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Name</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <form>
+                    {% for i in data1 %}
+                    <div class="d-flex align-items-center justify-content-left mb-3">
+                        •&nbsp;&nbsp;<a for="price-all" href="{% url 'productcatev' i.id %}" style="color:#6c757d; text-decoration: underline;">{{i.category_name}}</a>
+                        
+                    </div>
+                 {% endfor %}
+                    
+                </form>
+            </div>
+            <!-- Price End -->
+            
+           
+          
+        </div>
+        <!-- Shop Sidebar End -->
+
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+            
+               
+                {% for i in data %}
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="{{i.image.url}}" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'cart_add' i.id %}"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'ProductDetails' i.id %}"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-wrap" style="width: 9rem;" href="{% url 'ProductDetails' i.id %}">{{i.name}}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>₹{{i.price}}</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+
+
+{% endblock %}
